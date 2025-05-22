@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Login – Noteify</title>
+
+<!-- Bootstrap CDN -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+
+<style>
+  /* Body & background */
+  body {
+    background: rgba(198, 239, 211, 0.6);
+    background-size: cover;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+  }
+
+  /* Navbar with matching green theme */
+  nav.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1030;
+    background-color: #198754;
+    box-shadow: 0 0 15px 3px rgba(25, 135, 84, 0.7);
+    animation: glowing-green 3s infinite ease-in-out;
+    transition: box-shadow 0.3s ease;
+  }
+
+  nav.navbar:hover {
+    animation-play-state: paused;
+    box-shadow: 0 0 25px 8px rgba(25, 135, 84, 0.9);
+  }
+
+  /* Navbar brand */
+  .navbar-brand {
+    font-weight: 700;
+    color: white !important;
+    letter-spacing: 1.2px;
+  }
+
+  /* Navbar links */
+  .navbar-nav .nav-link {
+    color: white !important;
+    font-weight: 600;
+    transition: color 0.3s ease;
+  }
+
+  .navbar-nav .nav-link:hover {
+    color: #a6d6a8 !important;
+  }
+
+  /* Glowing green border animation */
+  @keyframes glowing-green {
+    0% { box-shadow: 0 0 5px 2px rgba(25, 135, 84, 0.5); }
+    50% { box-shadow: 0 0 15px 6px rgba(25, 135, 84, 0.8); }
+    100% { box-shadow: 0 0 5px 2px rgba(25, 135, 84, 0.5); }
+  }
+
+  /* Login card container */
+  .login-container {
+    background: white;
+    border: 2px solid #198754;
+    border-radius: 15px;
+    padding: 40px 30px;
+    max-width: 480px;
+    width: 100%;
+    animation: glowing-green 3s infinite ease-in-out;
+    transition: box-shadow 0.3s ease;
+    box-sizing: border-box;
+  }
+
+  .login-container:hover {
+    animation-play-state: paused;
+    box-shadow: 0 0 25px 8px rgba(25, 135, 84, 0.9);
+  }
+
+  /* Heading */
+  .login-container h2 {
+    color: #198754;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 1.8rem;
+  }
+
+  /* Form labels */
+  label {
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  /* Inputs */
+  input[type="email"],
+  input[type="password"] {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 1rem;
+    border: 1.5px solid #ced4da;
+    border-radius: 6px;
+    background-color: #fff;
+    font-family: inherit;
+    margin-bottom: 20px;
+    transition: border-color 0.3s ease;
+  }
+
+  input[type="email"]:focus,
+  input[type="password"]:focus {
+    border-color: #198754;
+    outline: none;
+    box-shadow: 0 0 8px rgba(25, 135, 84, 0.3);
+    background-color: #e6f4ea;
+  }
+
+  /* Submit button */
+  button[type="submit"] {
+    background-color: #198754;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    color: white;
+    font-weight: 600;
+    font-size: 1.1rem;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
+  }
+
+  button[type="submit"]:hover {
+    background-color: #146c43;
+  }
+
+  /* Links below the form */
+  .login-links {
+    margin-top: 15px;
+    text-align: center;
+  }
+
+  .login-links a {
+    color: #198754;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 1rem;
+    margin: 0 10px;
+    transition: color 0.3s ease;
+  }
+
+  .login-links a:hover {
+    color: #146c43;
+  }
+
+  /* Error message */
+  .text-danger {
+    font-weight: 600;
+    text-align: center;
+    margin-top: 10px;
+    color: red;
+  }
+</style>
+
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand" th:href="@{/}">Notify</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+         <!--  <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+          <li class="nav-item"><a class="nav-link" href="#why">Why Notify?</a></li>
+          <li class="nav-item"><a class="nav-link" href="#community">Community</a></li>--> 
+          <li class="nav-item"><a class="nav-link" th:href="@{/login}">Login</a></li>
+          <li class="nav-item"><a class="nav-link" th:href="@{/register}">Register</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <form class="login-container" th:action="@{/login}" method="post" th:object="${user}">
+    <h2>Login</h2>
+    
+    <div>
+      <label for="email">Email</label>
+      <input type="email" th:field="*{email}" id="email" required />
+    </div>
+    
+    <div>
+      <label for="password">Password</label>
+      <input type="password" th:field="*{password}" id="password" required />
+    </div>
+    
+    <button type="submit">Login</button>
+    
+    <div class="login-links">
+      <a th:href="@{/register}">Don't have an account? Register</a>
+    </div>
+    
+    <p th:if="${error}" class="text-danger" th:text="${error}"></p>
+  </form>
+
+  <!-- Optional JavaScript for Bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const errorMsg = document.querySelector(".text-danger");
+      if (errorMsg && errorMsg.textContent.trim() !== "") {
+        alert("Login failed: " + errorMsg.textContent);
+      }
+    });
+  </script>
+</body>
+</html>

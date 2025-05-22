@@ -1,0 +1,57 @@
+<div th:fragment="sidebar" class="sidebar">
+	<h4>Notify</h4>
+	<a th:href="@{/dashboard/tasks}">Tasks</a> <a
+		th:href="@{/dashboard/notes}">Notes</a> <a th:href="@{/logout}">Logout</a>
+
+	<h5 class="mt-4">Filters</h5>
+	<a th:href="@{/dashboard/tasks/priority}">Sort by Priority</a> <a
+		th:href="@{/dashboard/tasks/status}">Sort by Status</a> <a
+		th:href="@{/dashboard/tasks/upcoming}">Upcoming Tasks</a> 
+</div>
+<style>
+.sidebar {
+    padding: 30px 20px;
+    background-color: rgba(52, 58, 64, 0.9);
+    color: white;
+    box-shadow: 3px 0 10px rgba(0, 0, 0, 0.3);
+    transition: width 0.3s ease;
+}
+
+.sidebar-title {
+    font-weight: 700;
+    color: #4a90e2;
+    text-align: center;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-link {
+    display: block;
+    color: white;
+    margin: 12px 0;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 10px 15px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.sidebar-link:hover {
+    background-color: #4a90e2;
+    transform: translateX(5px);
+}
+
+.sidebar-subtitle {
+    color: #4a90e2;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+</style>
